@@ -2,21 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
 
   <title>Stitches by S — Embroidery Designs</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      padding: 0;
       background: #ffffff;
       font-family: Arial, Helvetica, sans-serif;
       color: #111111;
     }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* =========================================
+       MAIN CONTAINER
+    ========================================= */
 
     .container {
       max-width: 1200px;
@@ -31,9 +45,9 @@
       font-weight: 700;
     }
 
-    /* =========================
+    /* =========================================
        GALLERY
-    ========================= */
+    ========================================= */
 
     .gallery {
       display: grid;
@@ -66,9 +80,9 @@
       cursor: zoom-in;
     }
 
-    /* =========================
+    /* =========================================
        BUTTON AREA
-    ========================= */
+    ========================================= */
 
     .controls {
       display: flex;
@@ -111,9 +125,9 @@
       background: #dddddd;
     }
 
-    /* =========================
-       FULL SIZE MODAL
-    ========================= */
+    /* =========================================
+       FULL SCREEN MODAL
+    ========================================= */
 
     .modal {
       display: none;
@@ -123,8 +137,10 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.96);
+      background: rgba(0, 0, 0, 0.97);
       overflow: hidden;
+
+      touch-action: none;
     }
 
     .modal.active {
@@ -133,56 +149,86 @@
       justify-content: center;
     }
 
+    /* =========================================
+       MODAL IMAGE AREA
+    ========================================= */
+
     .modal-content {
+      position: relative;
       width: 100%;
       height: 100%;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       overflow: hidden;
+
       padding: 70px 20px 30px;
+
+      touch-action: none;
     }
 
     .modal-content img {
       max-width: 95%;
       max-height: 90%;
+
       object-fit: contain;
-      transform: scale(1);
-      transition: transform 0.2s ease;
+
+      transform: translate3d(0, 0, 0) scale(1);
+
+      transform-origin: center center;
+
       cursor: grab;
+
       user-select: none;
+      -webkit-user-select: none;
       -webkit-user-drag: none;
+
+      touch-action: none;
+
+      will-change: transform;
     }
 
     .modal-content img:active {
       cursor: grabbing;
     }
 
-    /* =========================
+    /* =========================================
        MODAL TOP BAR
-    ========================= */
+    ========================================= */
 
     .modal-top {
       position: absolute;
+
       top: 0;
       left: 0;
+
       width: 100%;
       height: 65px;
-      background: rgba(0, 0, 0, 0.85);
+
+      background: rgba(0, 0, 0, 0.88);
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       gap: 10px;
+
       z-index: 10000;
     }
 
     .modal-top button {
       border: none;
       cursor: pointer;
+
       border-radius: 7px;
+
       font-size: 15px;
       font-weight: 600;
+
       padding: 9px 15px;
+
       transition: 0.2s ease;
     }
 
@@ -204,16 +250,26 @@
       background: #999999;
     }
 
+    /* =========================================
+       CLOSE BUTTON
+    ========================================= */
+
     .close-btn {
       position: absolute;
+
       right: 18px;
       top: 12px;
+
       background: #e00000;
       color: #ffffff;
+
       font-size: 22px !important;
+
       width: 42px;
       height: 42px;
+
       padding: 0 !important;
+
       border-radius: 50% !important;
     }
 
@@ -222,20 +278,23 @@
       transform: rotate(90deg);
     }
 
-    /* =========================
-       ZOOM INDICATOR
-    ========================= */
+    /* =========================================
+       ZOOM LEVEL
+    ========================================= */
 
     .zoom-level {
       color: #ffffff;
+
       font-size: 14px;
+
       min-width: 65px;
+
       text-align: center;
     }
 
-    /* =========================
+    /* =========================================
        MOBILE
-    ========================= */
+    ========================================= */
 
     @media (max-width: 700px) {
 
@@ -286,36 +345,53 @@
         max-height: 90%;
       }
     }
+
   </style>
 </head>
 
+
 <body>
+
+
+  <!-- =========================================
+       MAIN PAGE
+  ========================================== -->
 
   <main class="container">
 
-    <h1>Stitches by S — Embroidery Designs</h1>
+    <h1>
+      Stitches by S — Embroidery Designs
+    </h1>
+
 
     <div class="gallery">
 
-      <!-- =========================
+
+      <!-- =====================================
            DESIGN 777
-      ========================== -->
+      ====================================== -->
 
       <div class="card">
 
         <div class="image-wrapper">
+
           <img
             id="image-777"
             src="777.png"
             alt="Stitches by S Embroidery Design 777"
           >
+
         </div>
+
 
         <div class="controls">
 
           <button
             class="view-btn"
-            onclick="openModal('777.png', 'Stitches by S — SBEMB-777')"
+            onclick="openModal(
+              '777.png',
+              'Stitches by S — SBEMB-777'
+            )"
           >
             View Full Size
           </button>
@@ -339,25 +415,31 @@
       </div>
 
 
-      <!-- =========================
+      <!-- =====================================
            DESIGN 778
-      ========================== -->
+      ====================================== -->
 
       <div class="card">
 
         <div class="image-wrapper">
+
           <img
             id="image-778"
             src="778.png"
             alt="Stitches by S Embroidery Design 778"
           >
+
         </div>
+
 
         <div class="controls">
 
           <button
             class="view-btn"
-            onclick="openModal('778.png', 'Stitches by S — SBEMB-778')"
+            onclick="openModal(
+              '778.png',
+              'Stitches by S — SBEMB-778'
+            )"
           >
             View Full Size
           </button>
@@ -381,25 +463,31 @@
       </div>
 
 
-      <!-- =========================
+      <!-- =====================================
            DESIGN 779
-      ========================== -->
+      ====================================== -->
 
       <div class="card">
 
         <div class="image-wrapper">
+
           <img
             id="image-779"
             src="779.png"
             alt="Stitches by S Embroidery Design 779"
           >
+
         </div>
+
 
         <div class="controls">
 
           <button
             class="view-btn"
-            onclick="openModal('779.png', 'Stitches by S — SBEMB-779')"
+            onclick="openModal(
+              '779.png',
+              'Stitches by S — SBEMB-779'
+            )"
           >
             View Full Size
           </button>
@@ -423,25 +511,31 @@
       </div>
 
 
-      <!-- =========================
+      <!-- =====================================
            DESIGN 780
-      ========================== -->
+      ====================================== -->
 
       <div class="card">
 
         <div class="image-wrapper">
+
           <img
             id="image-780"
             src="780.png"
             alt="Stitches by S Embroidery Design 780"
           >
+
         </div>
+
 
         <div class="controls">
 
           <button
             class="view-btn"
-            onclick="openModal('780.png', 'Stitches by S — SBEMB-780')"
+            onclick="openModal(
+              '780.png',
+              'Stitches by S — SBEMB-780'
+            )"
           >
             View Full Size
           </button>
@@ -465,25 +559,31 @@
       </div>
 
 
-      <!-- =========================
+      <!-- =====================================
            DESIGN 781
-      ========================== -->
+      ====================================== -->
 
       <div class="card">
 
         <div class="image-wrapper">
+
           <img
             id="image-781"
             src="781.png"
             alt="Stitches by S Embroidery Design 781"
           >
+
         </div>
+
 
         <div class="controls">
 
           <button
             class="view-btn"
-            onclick="openModal('781.png', 'Stitches by S — SBEMB-781')"
+            onclick="openModal(
+              '781.png',
+              'Stitches by S — SBEMB-781'
+            )"
           >
             View Full Size
           </button>
@@ -507,25 +607,31 @@
       </div>
 
 
-      <!-- =========================
+      <!-- =====================================
            DESIGN 782
-      ========================== -->
+      ====================================== -->
 
       <div class="card">
 
         <div class="image-wrapper">
+
           <img
             id="image-782"
             src="782.png"
             alt="Stitches by S Embroidery Design 782"
           >
+
         </div>
+
 
         <div class="controls">
 
           <button
             class="view-btn"
-            onclick="openModal('782.png', 'Stitches by S — SBEMB-782')"
+            onclick="openModal(
+              '782.png',
+              'Stitches by S — SBEMB-782'
+            )"
           >
             View Full Size
           </button>
@@ -548,22 +654,28 @@
 
       </div>
 
+
     </div>
 
   </main>
 
 
-  <!-- =========================
+  <!-- =========================================
        FULL SIZE MODAL
-  ========================== -->
+  ========================================== -->
 
   <div
     id="imageModal"
     class="modal"
-    onclick="closeModalOutside(event)"
   >
 
+
+    <!-- =======================================
+         TOP CONTROL BAR
+    ======================================== -->
+
     <div class="modal-top">
+
 
       <button
         class="modal-zoom"
@@ -572,12 +684,14 @@
         🔍 +
       </button>
 
+
       <button
         class="modal-zoom"
         onclick="changeModalZoom(-0.2)"
       >
         🔍 −
       </button>
+
 
       <button
         class="reset-btn"
@@ -586,12 +700,14 @@
         Reset
       </button>
 
+
       <span
         id="zoomLevel"
         class="zoom-level"
       >
         100%
       </span>
+
 
       <button
         class="close-btn"
@@ -601,23 +717,34 @@
         ×
       </button>
 
+
     </div>
 
 
-    <div class="modal-content">
+    <!-- =======================================
+         IMAGE AREA
+    ======================================== -->
+
+    <div
+      id="modalContent"
+      class="modal-content"
+    >
 
       <img
         id="modalImage"
         src=""
         alt="Full size embroidery design"
+        draggable="false"
       >
 
     </div>
+
 
   </div>
 
 
   <script>
+
 
     /* =========================================
        CARD IMAGE ZOOM
@@ -625,39 +752,76 @@
 
     const cardZoomLevels = {};
 
+
     function zoomCard(imageId, amount) {
 
-      const image = document.getElementById(imageId);
+      const image =
+        document.getElementById(imageId);
+
 
       if (!cardZoomLevels[imageId]) {
+
         cardZoomLevels[imageId] = 1;
+
       }
+
 
       cardZoomLevels[imageId] += amount;
 
+
       if (cardZoomLevels[imageId] < 1) {
+
         cardZoomLevels[imageId] = 1;
+
       }
+
 
       if (cardZoomLevels[imageId] > 2) {
+
         cardZoomLevels[imageId] = 2;
+
       }
 
+
       image.style.transform =
-        "scale(" + cardZoomLevels[imageId] + ")";
+        "scale(" +
+        cardZoomLevels[imageId] +
+        ")";
 
     }
 
 
     /* =========================================
-       MODAL
+       MODAL ELEMENTS
     ========================================= */
 
-    const modal = document.getElementById("imageModal");
-    const modalImage = document.getElementById("modalImage");
-    const zoomLevel = document.getElementById("zoomLevel");
+    const modal =
+      document.getElementById("imageModal");
+
+    const modalImage =
+      document.getElementById("modalImage");
+
+    const modalContent =
+      document.getElementById("modalContent");
+
+    const zoomLevel =
+      document.getElementById("zoomLevel");
+
+
+    /* =========================================
+       MODAL VARIABLES
+    ========================================= */
 
     let modalZoom = 1;
+
+    let translateX = 0;
+
+    let translateY = 0;
+
+
+    /* =========================================
+       OPEN MODAL
+    ========================================= */
 
     function openModal(imageSrc, title) {
 
@@ -669,11 +833,20 @@
 
       modalZoom = 1;
 
-      updateModalZoom();
+      translateX = 0;
+
+      translateY = 0;
+
+      updateModalTransform();
 
       document.body.style.overflow = "hidden";
+
     }
 
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================= */
 
     function closeModal() {
 
@@ -682,54 +855,90 @@
       modalImage.src = "";
 
       document.body.style.overflow = "";
-    }
 
+      modalZoom = 1;
 
-    function closeModalOutside(event) {
+      translateX = 0;
 
-      if (event.target === modal) {
-        closeModal();
-      }
+      translateY = 0;
 
     }
 
 
     /* =========================================
-       MODAL ZOOM
+       BUTTON ZOOM
     ========================================= */
 
     function changeModalZoom(amount) {
 
       modalZoom += amount;
 
+
       if (modalZoom < 0.5) {
+
         modalZoom = 0.5;
+
       }
+
 
       if (modalZoom > 5) {
+
         modalZoom = 5;
+
       }
 
-      updateModalZoom();
+
+      if (modalZoom <= 1) {
+
+        translateX = 0;
+
+        translateY = 0;
+
+      }
+
+
+      updateModalTransform();
+
     }
 
 
-    function updateModalZoom() {
+    /* =========================================
+       UPDATE TRANSFORM
+    ========================================= */
+
+    function updateModalTransform() {
 
       modalImage.style.transform =
-        "scale(" + modalZoom + ")";
+        "translate3d(" +
+        translateX +
+        "px, " +
+        translateY +
+        "px, 0) " +
+        "scale(" +
+        modalZoom +
+        ")";
+
 
       zoomLevel.textContent =
-        Math.round(modalZoom * 100) + "%";
+        Math.round(modalZoom * 100) +
+        "%";
 
     }
 
+
+    /* =========================================
+       RESET
+    ========================================= */
 
     function resetModalZoom() {
 
       modalZoom = 1;
 
-      updateModalZoom();
+      translateX = 0;
+
+      translateY = 0;
+
+      updateModalTransform();
 
     }
 
@@ -738,20 +947,395 @@
        MOUSE WHEEL ZOOM
     ========================================= */
 
-    modalImage.addEventListener(
+    modalContent.addEventListener(
       "wheel",
       function(event) {
 
         event.preventDefault();
 
+
         if (event.deltaY < 0) {
+
           changeModalZoom(0.2);
+
         } else {
+
           changeModalZoom(-0.2);
+
         }
 
       },
-      { passive: false }
+      {
+        passive: false
+      }
+    );
+
+
+    /* =========================================
+       TOUCH / FINGER ZOOM
+    ========================================= */
+
+    let initialPinchDistance = null;
+
+    let initialPinchZoom = 1;
+
+
+    function getTouchDistance(touch1, touch2) {
+
+      const dx =
+        touch2.clientX -
+        touch1.clientX;
+
+      const dy =
+        touch2.clientY -
+        touch1.clientY;
+
+
+      return Math.sqrt(
+        dx * dx +
+        dy * dy
+      );
+
+    }
+
+
+    /* =========================================
+       TOUCH START
+    ========================================= */
+
+    modalContent.addEventListener(
+      "touchstart",
+      function(event) {
+
+        event.preventDefault();
+
+
+        /* TWO FINGERS */
+
+        if (event.touches.length === 2) {
+
+          initialPinchDistance =
+            getTouchDistance(
+              event.touches[0],
+              event.touches[1]
+            );
+
+
+          initialPinchZoom =
+            modalZoom;
+
+          return;
+
+        }
+
+
+        /* ONE FINGER */
+
+        if (event.touches.length === 1) {
+
+          startDrag(
+            event.touches[0]
+          );
+
+        }
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    /* =========================================
+       TOUCH MOVE
+    ========================================= */
+
+    modalContent.addEventListener(
+      "touchmove",
+      function(event) {
+
+        event.preventDefault();
+
+
+        /* ==============================
+           TWO-FINGER PINCH
+        =============================== */
+
+        if (
+          event.touches.length === 2 &&
+          initialPinchDistance !== null
+        ) {
+
+          const currentDistance =
+            getTouchDistance(
+              event.touches[0],
+              event.touches[1]
+            );
+
+
+          const scale =
+            currentDistance /
+            initialPinchDistance;
+
+
+          modalZoom =
+            initialPinchZoom *
+            scale;
+
+
+          if (modalZoom < 0.5) {
+
+            modalZoom = 0.5;
+
+          }
+
+
+          if (modalZoom > 5) {
+
+            modalZoom = 5;
+
+          }
+
+
+          updateModalTransform();
+
+
+          return;
+
+        }
+
+
+        /* ==============================
+           ONE-FINGER DRAG
+        =============================== */
+
+        if (
+          event.touches.length === 1 &&
+          modalZoom > 1
+        ) {
+
+          moveDrag(
+            event.touches[0]
+          );
+
+        }
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    /* =========================================
+       TOUCH END
+    ========================================= */
+
+    modalContent.addEventListener(
+      "touchend",
+      function(event) {
+
+        if (event.touches.length < 2) {
+
+          initialPinchDistance = null;
+
+        }
+
+
+        if (event.touches.length === 0) {
+
+          endDrag();
+
+        }
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    /* =========================================
+       DRAG VARIABLES
+    ========================================= */
+
+    let isDragging = false;
+
+    let dragStartX = 0;
+
+    let dragStartY = 0;
+
+    let startTranslateX = 0;
+
+    let startTranslateY = 0;
+
+
+    /* =========================================
+       START DRAG
+    ========================================= */
+
+    function startDrag(touch) {
+
+      if (modalZoom <= 1) {
+
+        return;
+
+      }
+
+
+      isDragging = true;
+
+
+      dragStartX =
+        touch.clientX;
+
+      dragStartY =
+        touch.clientY;
+
+
+      startTranslateX =
+        translateX;
+
+      startTranslateY =
+        translateY;
+
+    }
+
+
+    /* =========================================
+       MOVE DRAG
+    ========================================= */
+
+    function moveDrag(touch) {
+
+      if (!isDragging) {
+
+        return;
+
+      }
+
+
+      const movementX =
+        touch.clientX -
+        dragStartX;
+
+
+      const movementY =
+        touch.clientY -
+        dragStartY;
+
+
+      translateX =
+        startTranslateX +
+        movementX;
+
+
+      translateY =
+        startTranslateY +
+        movementY;
+
+
+      updateModalTransform();
+
+    }
+
+
+    /* =========================================
+       END DRAG
+    ========================================= */
+
+    function endDrag() {
+
+      isDragging = false;
+
+    }
+
+
+    /* =========================================
+       MOUSE DRAG
+    ========================================= */
+
+    let mouseDragging = false;
+
+    let mouseStartX = 0;
+
+    let mouseStartY = 0;
+
+    let mouseStartTranslateX = 0;
+
+    let mouseStartTranslateY = 0;
+
+
+    modalImage.addEventListener(
+      "mousedown",
+      function(event) {
+
+        if (modalZoom <= 1) {
+
+          return;
+
+        }
+
+
+        event.preventDefault();
+
+
+        mouseDragging = true;
+
+
+        mouseStartX =
+          event.clientX;
+
+        mouseStartY =
+          event.clientY;
+
+
+        mouseStartTranslateX =
+          translateX;
+
+        mouseStartTranslateY =
+          translateY;
+
+      }
+    );
+
+
+    document.addEventListener(
+      "mousemove",
+      function(event) {
+
+        if (!mouseDragging) {
+
+          return;
+
+        }
+
+
+        translateX =
+          mouseStartTranslateX +
+          event.clientX -
+          mouseStartX;
+
+
+        translateY =
+          mouseStartTranslateY +
+          event.clientY -
+          mouseStartY;
+
+
+        updateModalTransform();
+
+      }
+    );
+
+
+    document.addEventListener(
+      "mouseup",
+      function() {
+
+        mouseDragging = false;
+
+      }
     );
 
 
@@ -764,27 +1348,73 @@
       function(event) {
 
         if (!modal.classList.contains("active")) {
+
           return;
+
         }
+
+
+        /* ESC */
 
         if (event.key === "Escape") {
+
           closeModal();
+
         }
+
+
+        /* PLUS */
 
         if (event.key === "+") {
+
           changeModalZoom(0.2);
+
         }
+
 
         if (event.key === "=") {
+
           changeModalZoom(0.2);
+
         }
+
+
+        /* MINUS */
 
         if (event.key === "-") {
+
           changeModalZoom(-0.2);
+
         }
 
+
+        /* RESET */
+
         if (event.key === "0") {
+
           resetModalZoom();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       CLICK BLACK BACKGROUND TO CLOSE
+    ========================================= */
+
+    modal.addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target === modal ||
+          event.target === modalContent
+        ) {
+
+          closeModal();
+
         }
 
       }
