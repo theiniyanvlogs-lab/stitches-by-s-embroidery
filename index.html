@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Stitches by S — Embroidery Designs</title>
 
   <style>
@@ -30,21 +31,214 @@
       font-weight: 700;
     }
 
+    /* =========================
+       GALLERY
+    ========================= */
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 30px;
     }
 
-    .gallery img {
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding-bottom: 15px;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      overflow: hidden;
+      background: #000000;
+      position: relative;
+    }
+
+    .image-wrapper img {
       display: block;
       width: 100%;
       height: auto;
-      border: 1px solid #e5e5e5;
-      background: #fff;
+      transition: transform 0.25s ease;
+      transform-origin: center center;
+      cursor: zoom-in;
     }
 
+    /* =========================
+       BUTTON AREA
+    ========================= */
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 15px 10px 0;
+    }
+
+    .controls button {
+      border: none;
+      border-radius: 7px;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .view-btn {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .view-btn:hover {
+      background: #333333;
+      transform: translateY(-1px);
+    }
+
+    .zoom-btn {
+      background: #eeeeee;
+      color: #111111;
+      font-size: 18px !important;
+      min-width: 42px;
+      padding: 8px 12px !important;
+    }
+
+    .zoom-btn:hover {
+      background: #dddddd;
+    }
+
+    /* =========================
+       FULL SIZE MODAL
+    ========================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.96);
+      overflow: hidden;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 70px 20px 30px;
+    }
+
+    .modal-content img {
+      max-width: 95%;
+      max-height: 90%;
+      object-fit: contain;
+      transform: scale(1);
+      transition: transform 0.2s ease;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .modal-content img:active {
+      cursor: grabbing;
+    }
+
+    /* =========================
+       MODAL TOP BAR
+    ========================= */
+
+    .modal-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 65px;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      z-index: 10000;
+    }
+
+    .modal-top button {
+      border: none;
+      cursor: pointer;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 9px 15px;
+      transition: 0.2s ease;
+    }
+
+    .modal-zoom {
+      background: #ffffff;
+      color: #111111;
+    }
+
+    .modal-zoom:hover {
+      background: #dddddd;
+    }
+
+    .reset-btn {
+      background: #777777;
+      color: #ffffff;
+    }
+
+    .reset-btn:hover {
+      background: #999999;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      background: #e00000;
+      color: #ffffff;
+      font-size: 22px !important;
+      width: 42px;
+      height: 42px;
+      padding: 0 !important;
+      border-radius: 50% !important;
+    }
+
+    .close-btn:hover {
+      background: #ff2222;
+      transform: rotate(90deg);
+    }
+
+    /* =========================
+       ZOOM INDICATOR
+    ========================= */
+
+    .zoom-level {
+      color: #ffffff;
+      font-size: 14px;
+      min-width: 65px;
+      text-align: center;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 700px) {
+
       .container {
         padding: 25px 12px 40px;
       }
@@ -58,22 +252,545 @@
         grid-template-columns: 1fr;
         gap: 20px;
       }
+
+      .controls {
+        gap: 6px;
+      }
+
+      .controls button {
+        font-size: 13px;
+        padding: 8px 11px;
+      }
+
+      .modal-top {
+        height: 60px;
+        gap: 5px;
+      }
+
+      .modal-top button {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      .close-btn {
+        right: 8px;
+        top: 9px;
+      }
+
+      .modal-content {
+        padding: 65px 5px 20px;
+      }
+
+      .modal-content img {
+        max-width: 100%;
+        max-height: 90%;
+      }
     }
   </style>
 </head>
 
 <body>
+
   <main class="container">
+
     <h1>Stitches by S — Embroidery Designs</h1>
 
     <div class="gallery">
-      <img src="777.png" alt="Stitches by S Embroidery Design 777">
-      <img src="778.png" alt="Stitches by S Embroidery Design 778">
-      <img src="779.png" alt="Stitches by S Embroidery Design 779">
-      <img src="780.png" alt="Stitches by S Embroidery Design 780">
-      <img src="781.png" alt="Stitches by S Embroidery Design 781">
-      <img src="782.png" alt="Stitches by S Embroidery Design 782">
+
+      <!-- =========================
+           DESIGN 777
+      ========================== -->
+
+      <div class="card">
+
+        <div class="image-wrapper">
+          <img
+            id="image-777"
+            src="777.png"
+            alt="Stitches by S Embroidery Design 777"
+          >
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="view-btn"
+            onclick="openModal('777.png', 'Stitches by S — SBEMB-777')"
+          >
+            View Full Size
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-777', 0.1)"
+          >
+            +
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-777', -0.1)"
+          >
+            −
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           DESIGN 778
+      ========================== -->
+
+      <div class="card">
+
+        <div class="image-wrapper">
+          <img
+            id="image-778"
+            src="778.png"
+            alt="Stitches by S Embroidery Design 778"
+          >
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="view-btn"
+            onclick="openModal('778.png', 'Stitches by S — SBEMB-778')"
+          >
+            View Full Size
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-778', 0.1)"
+          >
+            +
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-778', -0.1)"
+          >
+            −
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           DESIGN 779
+      ========================== -->
+
+      <div class="card">
+
+        <div class="image-wrapper">
+          <img
+            id="image-779"
+            src="779.png"
+            alt="Stitches by S Embroidery Design 779"
+          >
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="view-btn"
+            onclick="openModal('779.png', 'Stitches by S — SBEMB-779')"
+          >
+            View Full Size
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-779', 0.1)"
+          >
+            +
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-779', -0.1)"
+          >
+            −
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           DESIGN 780
+      ========================== -->
+
+      <div class="card">
+
+        <div class="image-wrapper">
+          <img
+            id="image-780"
+            src="780.png"
+            alt="Stitches by S Embroidery Design 780"
+          >
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="view-btn"
+            onclick="openModal('780.png', 'Stitches by S — SBEMB-780')"
+          >
+            View Full Size
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-780', 0.1)"
+          >
+            +
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-780', -0.1)"
+          >
+            −
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           DESIGN 781
+      ========================== -->
+
+      <div class="card">
+
+        <div class="image-wrapper">
+          <img
+            id="image-781"
+            src="781.png"
+            alt="Stitches by S Embroidery Design 781"
+          >
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="view-btn"
+            onclick="openModal('781.png', 'Stitches by S — SBEMB-781')"
+          >
+            View Full Size
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-781', 0.1)"
+          >
+            +
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-781', -0.1)"
+          >
+            −
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           DESIGN 782
+      ========================== -->
+
+      <div class="card">
+
+        <div class="image-wrapper">
+          <img
+            id="image-782"
+            src="782.png"
+            alt="Stitches by S Embroidery Design 782"
+          >
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="view-btn"
+            onclick="openModal('782.png', 'Stitches by S — SBEMB-782')"
+          >
+            View Full Size
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-782', 0.1)"
+          >
+            +
+          </button>
+
+          <button
+            class="zoom-btn"
+            onclick="zoomCard('image-782', -0.1)"
+          >
+            −
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
+
   </main>
+
+
+  <!-- =========================
+       FULL SIZE MODAL
+  ========================== -->
+
+  <div
+    id="imageModal"
+    class="modal"
+    onclick="closeModalOutside(event)"
+  >
+
+    <div class="modal-top">
+
+      <button
+        class="modal-zoom"
+        onclick="changeModalZoom(0.2)"
+      >
+        🔍 +
+      </button>
+
+      <button
+        class="modal-zoom"
+        onclick="changeModalZoom(-0.2)"
+      >
+        🔍 −
+      </button>
+
+      <button
+        class="reset-btn"
+        onclick="resetModalZoom()"
+      >
+        Reset
+      </button>
+
+      <span
+        id="zoomLevel"
+        class="zoom-level"
+      >
+        100%
+      </span>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-content">
+
+      <img
+        id="modalImage"
+        src=""
+        alt="Full size embroidery design"
+      >
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =========================================
+       CARD IMAGE ZOOM
+    ========================================= */
+
+    const cardZoomLevels = {};
+
+    function zoomCard(imageId, amount) {
+
+      const image = document.getElementById(imageId);
+
+      if (!cardZoomLevels[imageId]) {
+        cardZoomLevels[imageId] = 1;
+      }
+
+      cardZoomLevels[imageId] += amount;
+
+      if (cardZoomLevels[imageId] < 1) {
+        cardZoomLevels[imageId] = 1;
+      }
+
+      if (cardZoomLevels[imageId] > 2) {
+        cardZoomLevels[imageId] = 2;
+      }
+
+      image.style.transform =
+        "scale(" + cardZoomLevels[imageId] + ")";
+
+    }
+
+
+    /* =========================================
+       MODAL
+    ========================================= */
+
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const zoomLevel = document.getElementById("zoomLevel");
+
+    let modalZoom = 1;
+
+    function openModal(imageSrc, title) {
+
+      modal.classList.add("active");
+
+      modalImage.src = imageSrc;
+
+      modalImage.alt = title;
+
+      modalZoom = 1;
+
+      updateModalZoom();
+
+      document.body.style.overflow = "hidden";
+    }
+
+
+    function closeModal() {
+
+      modal.classList.remove("active");
+
+      modalImage.src = "";
+
+      document.body.style.overflow = "";
+    }
+
+
+    function closeModalOutside(event) {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    }
+
+
+    /* =========================================
+       MODAL ZOOM
+    ========================================= */
+
+    function changeModalZoom(amount) {
+
+      modalZoom += amount;
+
+      if (modalZoom < 0.5) {
+        modalZoom = 0.5;
+      }
+
+      if (modalZoom > 5) {
+        modalZoom = 5;
+      }
+
+      updateModalZoom();
+    }
+
+
+    function updateModalZoom() {
+
+      modalImage.style.transform =
+        "scale(" + modalZoom + ")";
+
+      zoomLevel.textContent =
+        Math.round(modalZoom * 100) + "%";
+
+    }
+
+
+    function resetModalZoom() {
+
+      modalZoom = 1;
+
+      updateModalZoom();
+
+    }
+
+
+    /* =========================================
+       MOUSE WHEEL ZOOM
+    ========================================= */
+
+    modalImage.addEventListener(
+      "wheel",
+      function(event) {
+
+        event.preventDefault();
+
+        if (event.deltaY < 0) {
+          changeModalZoom(0.2);
+        } else {
+          changeModalZoom(-0.2);
+        }
+
+      },
+      { passive: false }
+    );
+
+
+    /* =========================================
+       KEYBOARD CONTROLS
+    ========================================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (!modal.classList.contains("active")) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          closeModal();
+        }
+
+        if (event.key === "+") {
+          changeModalZoom(0.2);
+        }
+
+        if (event.key === "=") {
+          changeModalZoom(0.2);
+        }
+
+        if (event.key === "-") {
+          changeModalZoom(-0.2);
+        }
+
+        if (event.key === "0") {
+          resetModalZoom();
+        }
+
+      }
+    );
+
+  </script>
+
 </body>
 </html>
