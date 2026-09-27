@@ -2,2272 +2,266 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Stitches by S — Embroidery Designs</title>
-
   <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #111111;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    /* =========================================
-       MAIN CONTAINER
-    ========================================= */
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px 60px;
-    }
-
-    h1 {
-      text-align: center;
-      margin: 0 0 35px;
-      font-size: 32px;
-      font-weight: 700;
-    }
-
-    /* =========================================
-       GALLERY
-    ========================================= */
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e5e5e5;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      padding-bottom: 15px;
-    }
-
-    .image-wrapper {
-      width: 100%;
-      overflow: hidden;
-      background: #000000;
-      position: relative;
-    }
-
-    .image-wrapper img {
-      display: block;
-      width: 100%;
-      height: auto;
-      transition: transform 0.25s ease;
-      transform-origin: center center;
-      cursor: zoom-in;
-    }
-
-    /* =========================================
-       BUTTON AREA
-    ========================================= */
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 15px 10px 0;
-    }
-
-    .controls button {
-      border: none;
-      border-radius: 7px;
-      padding: 9px 14px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .view-btn {
-      background: #111111;
-      color: #ffffff;
-    }
-
-    .view-btn:hover {
-      background: #333333;
-      transform: translateY(-1px);
-    }
-
-    .zoom-btn {
-      background: #eeeeee;
-      color: #111111;
-      font-size: 18px !important;
-      min-width: 42px;
-      padding: 8px 12px !important;
-    }
-
-    .zoom-btn:hover {
-      background: #dddddd;
-    }
-
-    /* =========================================
-       FULL SCREEN MODAL
-    ========================================= */
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.97);
-      overflow: hidden;
-
-      touch-action: none;
-    }
-
-    .modal.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* =========================================
-       MODAL IMAGE AREA
-    ========================================= */
-
-    .modal-content {
-      position: relative;
-      width: 100%;
-      height: 100%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-
-      padding: 70px 20px 30px;
-
-      touch-action: none;
-    }
-
-    .modal-content img {
-      max-width: 95%;
-      max-height: 90%;
-
-      object-fit: contain;
-
-      transform: translate3d(0, 0, 0) scale(1);
-
-      transform-origin: center center;
-
-      cursor: grab;
-
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-user-drag: none;
-
-      touch-action: none;
-
-      will-change: transform;
-    }
-
-    .modal-content img:active {
-      cursor: grabbing;
-    }
-
-    /* =========================================
-       MODAL TOP BAR
-    ========================================= */
-
-    .modal-top {
-      position: absolute;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 65px;
-
-      background: rgba(0, 0, 0, 0.88);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      gap: 10px;
-
-      z-index: 10000;
-    }
-
-    .modal-top button {
-      border: none;
-      cursor: pointer;
-
-      border-radius: 7px;
-
-      font-size: 15px;
-      font-weight: 600;
-
-      padding: 9px 15px;
-
-      transition: 0.2s ease;
-    }
-
-    .modal-zoom {
-      background: #ffffff;
-      color: #111111;
-    }
-
-    .modal-zoom:hover {
-      background: #dddddd;
-    }
-
-    .reset-btn {
-      background: #777777;
-      color: #ffffff;
-    }
-
-    .reset-btn:hover {
-      background: #999999;
-    }
-
-    /* =========================================
-       CLOSE BUTTON
-    ========================================= */
-
-    .close-btn {
-      position: absolute;
-
-      right: 18px;
-      top: 12px;
-
-      background: #e00000;
-      color: #ffffff;
-
-      font-size: 22px !important;
-
-      width: 42px;
-      height: 42px;
-
-      padding: 0 !important;
-
-      border-radius: 50% !important;
-    }
-
-    .close-btn:hover {
-      background: #ff2222;
-      transform: rotate(90deg);
-    }
-
-    /* =========================================
-       ZOOM LEVEL
-    ========================================= */
-
-    .zoom-level {
-      color: #ffffff;
-
-      font-size: 14px;
-
-      min-width: 65px;
-
-      text-align: center;
-    }
-
-    /* =========================================
-       MOBILE
-    ========================================= */
-
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #fff; font-family: Arial, Helvetica, sans-serif; color: #111; }
+    body { overflow-x: hidden; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 60px; }
+    h1 { text-align: center; margin: 0 0 35px; font-size: 32px; font-weight: 700; }
+    .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+    .card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e5e5; box-shadow: 0 4px 15px rgba(0,0,0,.08); padding-bottom: 15px; }
+    .image-wrapper { width: 100%; overflow: hidden; background: #000; position: relative; }
+    .image-wrapper img { display: block; width: 100%; height: auto; transition: transform .25s ease; transform-origin: center center; cursor: zoom-in; }
+    .controls { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; padding: 15px 10px 0; }
+    .controls button { border: none; border-radius: 7px; padding: 9px 14px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s ease; }
+    .view-btn { background: #111; color: #fff; }
+    .view-btn:hover { background: #333; transform: translateY(-1px); }
+    .zoom-btn { background: #eee; color: #111; font-size: 18px !important; min-width: 42px; padding: 8px 12px !important; }
+    .zoom-btn:hover { background: #ddd; }
+    .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,.97); overflow: hidden; touch-action: none; }
+    .modal.active { display: flex; align-items: center; justify-content: center; }
+    .modal-content { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 70px 20px 30px; touch-action: none; }
+    .modal-content img { max-width: 95%; max-height: 90%; object-fit: contain; transform: translate3d(0,0,0) scale(1); transform-origin: center center; cursor: grab; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; touch-action: none; will-change: transform; }
+    .modal-content img:active { cursor: grabbing; }
+    .modal-top { position: absolute; top: 0; left: 0; width: 100%; height: 65px; background: rgba(0,0,0,.88); display: flex; justify-content: center; align-items: center; gap: 10px; z-index: 10000; }
+    .modal-top button { border: none; cursor: pointer; border-radius: 7px; font-size: 15px; font-weight: 600; padding: 9px 15px; transition: .2s ease; }
+    .modal-zoom { background: #fff; color: #111; }
+    .modal-zoom:hover { background: #ddd; }
+    .reset-btn { background: #777; color: #fff; }
+    .reset-btn:hover { background: #999; }
+    .close-btn { position: absolute; right: 18px; top: 12px; background: #e00000; color: #fff; font-size: 22px !important; width: 42px; height: 42px; padding: 0 !important; border-radius: 50% !important; }
+    .close-btn:hover { background: #f22; transform: rotate(90deg); }
+    .zoom-level { color: #fff; font-size: 14px; min-width: 65px; text-align: center; }
     @media (max-width: 700px) {
-
-      .container {
-        padding: 25px 12px 40px;
-      }
-
-      h1 {
-        font-size: 25px;
-        margin-bottom: 25px;
-      }
-
-      .gallery {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .controls {
-        gap: 6px;
-      }
-
-      .controls button {
-        font-size: 13px;
-        padding: 8px 11px;
-      }
-
-      .modal-top {
-        height: 60px;
-        gap: 5px;
-      }
-
-      .modal-top button {
-        padding: 8px 10px;
-        font-size: 13px;
-      }
-
-      .close-btn {
-        right: 8px;
-        top: 9px;
-      }
-
-      .modal-content {
-        padding: 65px 5px 20px;
-      }
-
-      .modal-content img {
-        max-width: 100%;
-        max-height: 90%;
-      }
+      .container { padding: 25px 12px 40px; }
+      h1 { font-size: 25px; margin-bottom: 25px; }
+      .gallery { grid-template-columns: 1fr; gap: 20px; }
+      .controls { gap: 6px; }
+      .controls button { font-size: 13px; padding: 8px 11px; }
+      .modal-top { height: 60px; gap: 5px; }
+      .modal-top button { padding: 8px 10px; font-size: 13px; }
+      .close-btn { right: 8px; top: 9px; }
+      .modal-content { padding: 65px 5px 20px; }
+      .modal-content img { max-width: 100%; max-height: 90%; }
     }
-
   </style>
 </head>
-
-
 <body>
+<main class="container">
+  <h1>Stitches by S — Embroidery Designs</h1>
+  <div class="gallery" id="gallery"></div>
+</main>
 
+<div id="imageModal" class="modal">
+  <div class="modal-top">
+    <button class="modal-zoom" onclick="changeModalZoom(.2)">🔍 +</button>
+    <button class="modal-zoom" onclick="changeModalZoom(-.2)">🔍 −</button>
+    <button class="reset-btn" onclick="resetModalZoom()">Reset</button>
+    <span id="zoomLevel" class="zoom-level">100%</span>
+    <button class="close-btn" onclick="closeModal()" aria-label="Close">×</button>
+  </div>
+  <div id="modalContent" class="modal-content">
+    <img id="modalImage" src="" alt="Full size embroidery design" draggable="false">
+  </div>
+</div>
 
-  <!-- =========================================
-       MAIN PAGE
-  ========================================== -->
+<script>
+  const gallery = document.getElementById("gallery");
 
-  <main class="container">
-
-    <h1>
-      Stitches by S — Embroidery Designs
-    </h1>
-
-
-    <div class="gallery">
-
-
-      <!-- =====================================
-           DESIGN 777
-      ====================================== -->
-
-      <div class="card">
-
-        <div class="image-wrapper">
-
-          <img
-            id="image-777"
-            src="777.png"
-            alt="Stitches by S Embroidery Design 777"
-          >
-
-        </div>
-
-
-        <div class="controls">
-
-          <button
-            class="view-btn"
-            onclick="openModal(
-              '777.png',
-              'Stitches by S — SBEMB-777'
-            )"
-          >
-            View Full Size
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-777', 0.1)"
-          >
-            +
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-777', -0.1)"
-          >
-            −
-          </button>
-
-        </div>
-
+  for (let number = 777; number <= 810; number++) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="image-wrapper">
+        <img id="image-${number}" src="${number}.png"
+             alt="Stitches by S Embroidery Design ${number}">
       </div>
-
-
-      <!-- =====================================
-           DESIGN 778
-      ====================================== -->
-
-      <div class="card">
-
-        <div class="image-wrapper">
-
-          <img
-            id="image-778"
-            src="778.png"
-            alt="Stitches by S Embroidery Design 778"
-          >
-
-        </div>
-
-
-        <div class="controls">
-
-          <button
-            class="view-btn"
-            onclick="openModal(
-              '778.png',
-              'Stitches by S — SBEMB-778'
-            )"
-          >
-            View Full Size
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-778', 0.1)"
-          >
-            +
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-778', -0.1)"
-          >
-            −
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================
-           DESIGN 779
-      ====================================== -->
-
-      <div class="card">
-
-        <div class="image-wrapper">
-
-          <img
-            id="image-779"
-            src="779.png"
-            alt="Stitches by S Embroidery Design 779"
-          >
-
-        </div>
-
-
-        <div class="controls">
-
-          <button
-            class="view-btn"
-            onclick="openModal(
-              '779.png',
-              'Stitches by S — SBEMB-779'
-            )"
-          >
-            View Full Size
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-779', 0.1)"
-          >
-            +
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-779', -0.1)"
-          >
-            −
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================
-           DESIGN 780
-      ====================================== -->
-
-      <div class="card">
-
-        <div class="image-wrapper">
-
-          <img
-            id="image-780"
-            src="780.png"
-            alt="Stitches by S Embroidery Design 780"
-          >
-
-        </div>
-
-
-        <div class="controls">
-
-          <button
-            class="view-btn"
-            onclick="openModal(
-              '780.png',
-              'Stitches by S — SBEMB-780'
-            )"
-          >
-            View Full Size
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-780', 0.1)"
-          >
-            +
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-780', -0.1)"
-          >
-            −
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================
-           DESIGN 781
-      ====================================== -->
-
-      <div class="card">
-
-        <div class="image-wrapper">
-
-          <img
-            id="image-781"
-            src="781.png"
-            alt="Stitches by S Embroidery Design 781"
-          >
-
-        </div>
-
-
-        <div class="controls">
-
-          <button
-            class="view-btn"
-            onclick="openModal(
-              '781.png',
-              'Stitches by S — SBEMB-781'
-            )"
-          >
-            View Full Size
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-781', 0.1)"
-          >
-            +
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-781', -0.1)"
-          >
-            −
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================
-           DESIGN 782
-      ====================================== -->
-
-      <div class="card">
-
-        <div class="image-wrapper">
-
-          <img
-            id="image-782"
-            src="782.png"
-            alt="Stitches by S Embroidery Design 782"
-          >
-
-        </div>
-
-
-        <div class="controls">
-
-          <button
-            class="view-btn"
-            onclick="openModal(
-              '782.png',
-              'Stitches by S — SBEMB-782'
-            )"
-          >
-            View Full Size
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-782', 0.1)"
-          >
-            +
-          </button>
-
-          <button
-            class="zoom-btn"
-            onclick="zoomCard('image-782', -0.1)"
-          >
-            −
-          </button>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-  <!-- =====================================
-           DESIGN 783
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-783"
-      src="783.png"
-      alt="Stitches by S Embroidery Design 783"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '783.png',
-        'Stitches by S — SBEMB-783'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-783', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-783', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 784
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-784"
-      src="784.png"
-      alt="Stitches by S Embroidery Design 784"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '784.png',
-        'Stitches by S — SBEMB-784'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-784', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-784', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 785
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-785"
-      src="785.png"
-      alt="Stitches by S Embroidery Design 785"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '785.png',
-        'Stitches by S — SBEMB-785'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-785', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-785', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 786
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-786"
-      src="786.png"
-      alt="Stitches by S Embroidery Design 786"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '786.png',
-        'Stitches by S — SBEMB-786'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-786', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-786', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 787
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-787"
-      src="787.png"
-      alt="Stitches by S Embroidery Design 787"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '787.png',
-        'Stitches by S — SBEMB-787'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-787', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-787', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 788
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-788"
-      src="788.png"
-      alt="Stitches by S Embroidery Design 788"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '788.png',
-        'Stitches by S — SBEMB-788'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-788', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-788', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 789
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-789"
-      src="789.png"
-      alt="Stitches by S Embroidery Design 789"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '789.png',
-        'Stitches by S — SBEMB-789'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-789', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-789', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 790
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-790"
-      src="790.png"
-      alt="Stitches by S Embroidery Design 790"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '790.png',
-        'Stitches by S — SBEMB-790'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-790', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-790', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 791
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-791"
-      src="791.png"
-      alt="Stitches by S Embroidery Design 791"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '791.png',
-        'Stitches by S — SBEMB-791'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-791', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-791', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 792
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-792"
-      src="792.png"
-      alt="Stitches by S Embroidery Design 792"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '792.png',
-        'Stitches by S — SBEMB-792'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-792', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-792', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 793
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-793"
-      src="793.png"
-      alt="Stitches by S Embroidery Design 793"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '793.png',
-        'Stitches by S — SBEMB-793'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-793', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-793', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 794
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-794"
-      src="794.png"
-      alt="Stitches by S Embroidery Design 794"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '794.png',
-        'Stitches by S — SBEMB-794'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-794', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-794', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 795
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-795"
-      src="795.png"
-      alt="Stitches by S Embroidery Design 795"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '795.png',
-        'Stitches by S — SBEMB-795'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-795', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-795', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 796
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-796"
-      src="796.png"
-      alt="Stitches by S Embroidery Design 796"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '796.png',
-        'Stitches by S — SBEMB-796'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-796', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-796', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 797
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-797"
-      src="797.png"
-      alt="Stitches by S Embroidery Design 797"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '797.png',
-        'Stitches by S — SBEMB-797'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-797', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-797', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 798
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-798"
-      src="798.png"
-      alt="Stitches by S Embroidery Design 798"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '798.png',
-        'Stitches by S — SBEMB-798'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-798', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-798', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 799
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-799"
-      src="799.png"
-      alt="Stitches by S Embroidery Design 799"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '799.png',
-        'Stitches by S — SBEMB-799'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-799', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-799', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-           DESIGN 800
-      ====================================== -->
-
-<div class="card">
-
-  <div class="image-wrapper">
-
-    <img
-      id="image-800"
-      src="800.png"
-      alt="Stitches by S Embroidery Design 800"
-    >
-
-  </div>
-
-  <div class="controls">
-
-    <button
-      class="view-btn"
-      onclick="openModal(
-        '800.png',
-        'Stitches by S — SBEMB-800'
-      )"
-    >
-      View Full Size
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-800', 0.1)"
-    >
-      +
-    </button>
-
-    <button
-      class="zoom-btn"
-      onclick="zoomCard('image-800', -0.1)"
-    >
-      −
-    </button>
-
-  </div>
-
-</div>
-
-    
-  </main>
-  
-
-  <!-- =========================================
-       FULL SIZE MODAL
-  ========================================== -->
-
-  <div
-    id="imageModal"
-    class="modal"
-  >
-
-
-    <!-- =======================================
-         TOP CONTROL BAR
-    ======================================== -->
-
-    <div class="modal-top">
-
-
-      <button
-        class="modal-zoom"
-        onclick="changeModalZoom(0.2)"
-      >
-        🔍 +
-      </button>
-
-
-      <button
-        class="modal-zoom"
-        onclick="changeModalZoom(-0.2)"
-      >
-        🔍 −
-      </button>
-
-
-      <button
-        class="reset-btn"
-        onclick="resetModalZoom()"
-      >
-        Reset
-      </button>
-
-
-      <span
-        id="zoomLevel"
-        class="zoom-level"
-      >
-        100%
-      </span>
-
-
-      <button
-        class="close-btn"
-        onclick="closeModal()"
-        aria-label="Close"
-      >
-        ×
-      </button>
-
-
-    </div>
-
-
-    <!-- =======================================
-         IMAGE AREA
-    ======================================== -->
-
-    <div
-      id="modalContent"
-      class="modal-content"
-    >
-
-      <img
-        id="modalImage"
-        src=""
-        alt="Full size embroidery design"
-        draggable="false"
-      >
-
-    </div>
-
-
-  </div>
-
-
-  <script>
-
-
-    /* =========================================
-       CARD IMAGE ZOOM
-    ========================================= */
-
-    const cardZoomLevels = {};
-
-
-    function zoomCard(imageId, amount) {
-
-      const image =
-        document.getElementById(imageId);
-
-
-      if (!cardZoomLevels[imageId]) {
-
-        cardZoomLevels[imageId] = 1;
-
-      }
-
-
-      cardZoomLevels[imageId] += amount;
-
-
-      if (cardZoomLevels[imageId] < 1) {
-
-        cardZoomLevels[imageId] = 1;
-
-      }
-
-
-      if (cardZoomLevels[imageId] > 2) {
-
-        cardZoomLevels[imageId] = 2;
-
-      }
-
-
-      image.style.transform =
-        "scale(" +
-        cardZoomLevels[imageId] +
-        ")";
-
-    }
-
-
-    /* =========================================
-       MODAL ELEMENTS
-    ========================================= */
-
-    const modal =
-      document.getElementById("imageModal");
-
-    const modalImage =
-      document.getElementById("modalImage");
-
-    const modalContent =
-      document.getElementById("modalContent");
-
-    const zoomLevel =
-      document.getElementById("zoomLevel");
-
-
-    /* =========================================
-       MODAL VARIABLES
-    ========================================= */
-
-    let modalZoom = 1;
-
-    let translateX = 0;
-
-    let translateY = 0;
-
-
-    /* =========================================
-       OPEN MODAL
-    ========================================= */
-
-    function openModal(imageSrc, title) {
-
-      modal.classList.add("active");
-
-      modalImage.src = imageSrc;
-
-      modalImage.alt = title;
-
-      modalZoom = 1;
-
+      <div class="controls">
+        <button class="view-btn"
+          onclick="openModal('${number}.png', 'Stitches by S — SBEMB-${number}')">
+          View Full Size
+        </button>
+        <button class="zoom-btn" onclick="zoomCard('image-${number}', .1)">+</button>
+        <button class="zoom-btn" onclick="zoomCard('image-${number}', -.1)">−</button>
+      </div>`;
+    gallery.appendChild(card);
+  }
+
+  const cardZoomLevels = {};
+
+  function zoomCard(imageId, amount) {
+    const image = document.getElementById(imageId);
+    if (!cardZoomLevels[imageId]) cardZoomLevels[imageId] = 1;
+    cardZoomLevels[imageId] += amount;
+    cardZoomLevels[imageId] = Math.min(2, Math.max(1, cardZoomLevels[imageId]));
+    image.style.transform = `scale(${cardZoomLevels[imageId]})`;
+  }
+
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalContent = document.getElementById("modalContent");
+  const zoomLevel = document.getElementById("zoomLevel");
+
+  let modalZoom = 1, translateX = 0, translateY = 0;
+
+  function openModal(imageSrc, title) {
+    modal.classList.add("active");
+    modalImage.src = imageSrc;
+    modalImage.alt = title;
+    modalZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateModalTransform();
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.remove("active");
+    modalImage.src = "";
+    document.body.style.overflow = "";
+    modalZoom = 1;
+    translateX = 0;
+    translateY = 0;
+  }
+
+  function changeModalZoom(amount) {
+    modalZoom += amount;
+    modalZoom = Math.min(5, Math.max(.5, modalZoom));
+    if (modalZoom <= 1) {
       translateX = 0;
-
       translateY = 0;
+    }
+    updateModalTransform();
+  }
 
-      updateModalTransform();
+  function updateModalTransform() {
+    modalImage.style.transform =
+      `translate3d(${translateX}px, ${translateY}px, 0) scale(${modalZoom})`;
+    zoomLevel.textContent = `${Math.round(modalZoom * 100)}%`;
+  }
 
-      document.body.style.overflow = "hidden";
+  function resetModalZoom() {
+    modalZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateModalTransform();
+  }
 
+  modalContent.addEventListener("wheel", event => {
+    event.preventDefault();
+    changeModalZoom(event.deltaY < 0 ? .2 : -.2);
+  }, { passive: false });
+
+  let initialPinchDistance = null;
+  let initialPinchZoom = 1;
+
+  function getTouchDistance(a, b) {
+    const dx = b.clientX - a.clientX;
+    const dy = b.clientY - a.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  modalContent.addEventListener("touchstart", event => {
+    event.preventDefault();
+
+    if (event.touches.length === 2) {
+      initialPinchDistance = getTouchDistance(event.touches[0], event.touches[1]);
+      initialPinchZoom = modalZoom;
+      endDrag();
+      return;
     }
 
+    if (event.touches.length === 1) startDrag(event.touches[0]);
+  }, { passive: false });
 
-    /* =========================================
-       CLOSE MODAL
-    ========================================= */
+  modalContent.addEventListener("touchmove", event => {
+    event.preventDefault();
 
-    function closeModal() {
-
-      modal.classList.remove("active");
-
-      modalImage.src = "";
-
-      document.body.style.overflow = "";
-
-      modalZoom = 1;
-
-      translateX = 0;
-
-      translateY = 0;
-
-    }
-
-
-    /* =========================================
-       BUTTON ZOOM
-    ========================================= */
-
-    function changeModalZoom(amount) {
-
-      modalZoom += amount;
-
-
-      if (modalZoom < 0.5) {
-
-        modalZoom = 0.5;
-
-      }
-
-
-      if (modalZoom > 5) {
-
-        modalZoom = 5;
-
-      }
-
-
+    if (event.touches.length === 2 && initialPinchDistance !== null) {
+      const currentDistance = getTouchDistance(event.touches[0], event.touches[1]);
+      modalZoom = initialPinchZoom * (currentDistance / initialPinchDistance);
+      modalZoom = Math.min(5, Math.max(.5, modalZoom));
       if (modalZoom <= 1) {
-
         translateX = 0;
-
         translateY = 0;
-
       }
-
-
       updateModalTransform();
-
+      return;
     }
 
-
-    /* =========================================
-       UPDATE TRANSFORM
-    ========================================= */
-
-    function updateModalTransform() {
-
-      modalImage.style.transform =
-        "translate3d(" +
-        translateX +
-        "px, " +
-        translateY +
-        "px, 0) " +
-        "scale(" +
-        modalZoom +
-        ")";
-
-
-      zoomLevel.textContent =
-        Math.round(modalZoom * 100) +
-        "%";
-
+    if (event.touches.length === 1 && modalZoom > 1) {
+      moveDrag(event.touches[0]);
     }
-
-
-    /* =========================================
-       RESET
-    ========================================= */
-
-    function resetModalZoom() {
-
-      modalZoom = 1;
-
-      translateX = 0;
-
-      translateY = 0;
-
-      updateModalTransform();
-
-    }
-
-
-    /* =========================================
-       MOUSE WHEEL ZOOM
-    ========================================= */
-
-    modalContent.addEventListener(
-      "wheel",
-      function(event) {
-
-        event.preventDefault();
-
-
-        if (event.deltaY < 0) {
-
-          changeModalZoom(0.2);
-
-        } else {
-
-          changeModalZoom(-0.2);
-
-        }
-
-      },
-      {
-        passive: false
-      }
-    );
-
-
-    /* =========================================
-       TOUCH / FINGER ZOOM
-    ========================================= */
-
-    let initialPinchDistance = null;
-
-    let initialPinchZoom = 1;
-
-
-    function getTouchDistance(touch1, touch2) {
-
-      const dx =
-        touch2.clientX -
-        touch1.clientX;
-
-      const dy =
-        touch2.clientY -
-        touch1.clientY;
-
-
-      return Math.sqrt(
-        dx * dx +
-        dy * dy
-      );
-
-    }
-
-
-    /* =========================================
-       TOUCH START
-    ========================================= */
-
-    modalContent.addEventListener(
-      "touchstart",
-      function(event) {
-
-        event.preventDefault();
-
-
-        /* TWO FINGERS */
-
-        if (event.touches.length === 2) {
-
-          initialPinchDistance =
-            getTouchDistance(
-              event.touches[0],
-              event.touches[1]
-            );
-
-
-          initialPinchZoom =
-            modalZoom;
-
-          return;
-
-        }
-
-
-        /* ONE FINGER */
-
-        if (event.touches.length === 1) {
-
-          startDrag(
-            event.touches[0]
-          );
-
-        }
-
-      },
-      {
-        passive: false
-      }
-    );
-
-
-    /* =========================================
-       TOUCH MOVE
-    ========================================= */
-
-    modalContent.addEventListener(
-      "touchmove",
-      function(event) {
-
-        event.preventDefault();
-
-
-        /* ==============================
-           TWO-FINGER PINCH
-        =============================== */
-
-        if (
-          event.touches.length === 2 &&
-          initialPinchDistance !== null
-        ) {
-
-          const currentDistance =
-            getTouchDistance(
-              event.touches[0],
-              event.touches[1]
-            );
-
-
-          const scale =
-            currentDistance /
-            initialPinchDistance;
-
-
-          modalZoom =
-            initialPinchZoom *
-            scale;
-
-
-          if (modalZoom < 0.5) {
-
-            modalZoom = 0.5;
-
-          }
-
-
-          if (modalZoom > 5) {
-
-            modalZoom = 5;
-
-          }
-
-
-          updateModalTransform();
-
-
-          return;
-
-        }
-
-
-        /* ==============================
-           ONE-FINGER DRAG
-        =============================== */
-
-        if (
-          event.touches.length === 1 &&
-          modalZoom > 1
-        ) {
-
-          moveDrag(
-            event.touches[0]
-          );
-
-        }
-
-      },
-      {
-        passive: false
-      }
-    );
-
-
-    /* =========================================
-       TOUCH END
-    ========================================= */
-
-    modalContent.addEventListener(
-      "touchend",
-      function(event) {
-
-        if (event.touches.length < 2) {
-
-          initialPinchDistance = null;
-
-        }
-
-
-        if (event.touches.length === 0) {
-
-          endDrag();
-
-        }
-
-      },
-      {
-        passive: false
-      }
-    );
-
-
-    /* =========================================
-       DRAG VARIABLES
-    ========================================= */
-
-    let isDragging = false;
-
-    let dragStartX = 0;
-
-    let dragStartY = 0;
-
-    let startTranslateX = 0;
-
-    let startTranslateY = 0;
-
-
-    /* =========================================
-       START DRAG
-    ========================================= */
-
-    function startDrag(touch) {
-
-      if (modalZoom <= 1) {
-
-        return;
-
-      }
-
-
-      isDragging = true;
-
-
-      dragStartX =
-        touch.clientX;
-
-      dragStartY =
-        touch.clientY;
-
-
-      startTranslateX =
-        translateX;
-
-      startTranslateY =
-        translateY;
-
-    }
-
-
-    /* =========================================
-       MOVE DRAG
-    ========================================= */
-
-    function moveDrag(touch) {
-
-      if (!isDragging) {
-
-        return;
-
-      }
-
-
-      const movementX =
-        touch.clientX -
-        dragStartX;
-
-
-      const movementY =
-        touch.clientY -
-        dragStartY;
-
-
-      translateX =
-        startTranslateX +
-        movementX;
-
-
-      translateY =
-        startTranslateY +
-        movementY;
-
-
-      updateModalTransform();
-
-    }
-
-
-    /* =========================================
-       END DRAG
-    ========================================= */
-
-    function endDrag() {
-
-      isDragging = false;
-
-    }
-
-
-    /* =========================================
-       MOUSE DRAG
-    ========================================= */
-
-    let mouseDragging = false;
-
-    let mouseStartX = 0;
-
-    let mouseStartY = 0;
-
-    let mouseStartTranslateX = 0;
-
-    let mouseStartTranslateY = 0;
-
-
-    modalImage.addEventListener(
-      "mousedown",
-      function(event) {
-
-        if (modalZoom <= 1) {
-
-          return;
-
-        }
-
-
-        event.preventDefault();
-
-
-        mouseDragging = true;
-
-
-        mouseStartX =
-          event.clientX;
-
-        mouseStartY =
-          event.clientY;
-
-
-        mouseStartTranslateX =
-          translateX;
-
-        mouseStartTranslateY =
-          translateY;
-
-      }
-    );
-
-
-    document.addEventListener(
-      "mousemove",
-      function(event) {
-
-        if (!mouseDragging) {
-
-          return;
-
-        }
-
-
-        translateX =
-          mouseStartTranslateX +
-          event.clientX -
-          mouseStartX;
-
-
-        translateY =
-          mouseStartTranslateY +
-          event.clientY -
-          mouseStartY;
-
-
-        updateModalTransform();
-
-      }
-    );
-
-
-    document.addEventListener(
-      "mouseup",
-      function() {
-
-        mouseDragging = false;
-
-      }
-    );
-
-
-    /* =========================================
-       KEYBOARD CONTROLS
-    ========================================= */
-
-    document.addEventListener(
-      "keydown",
-      function(event) {
-
-        if (!modal.classList.contains("active")) {
-
-          return;
-
-        }
-
-
-        /* ESC */
-
-        if (event.key === "Escape") {
-
-          closeModal();
-
-        }
-
-
-        /* PLUS */
-
-        if (event.key === "+") {
-
-          changeModalZoom(0.2);
-
-        }
-
-
-        if (event.key === "=") {
-
-          changeModalZoom(0.2);
-
-        }
-
-
-        /* MINUS */
-
-        if (event.key === "-") {
-
-          changeModalZoom(-0.2);
-
-        }
-
-
-        /* RESET */
-
-        if (event.key === "0") {
-
-          resetModalZoom();
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       CLICK BLACK BACKGROUND TO CLOSE
-    ========================================= */
-
-    modal.addEventListener(
-      "click",
-      function(event) {
-
-        if (
-          event.target === modal ||
-          event.target === modalContent
-        ) {
-
-          closeModal();
-
-        }
-
-      }
-    );
-
-  </script>
-
+  }, { passive: false });
+
+  modalContent.addEventListener("touchend", event => {
+    if (event.touches.length < 2) initialPinchDistance = null;
+    if (event.touches.length === 0) endDrag();
+  }, { passive: false });
+
+  let isDragging = false;
+  let dragStartX = 0, dragStartY = 0;
+  let startTranslateX = 0, startTranslateY = 0;
+
+  function startDrag(touch) {
+    if (modalZoom <= 1) return;
+    isDragging = true;
+    dragStartX = touch.clientX;
+    dragStartY = touch.clientY;
+    startTranslateX = translateX;
+    startTranslateY = translateY;
+  }
+
+  function moveDrag(touch) {
+    if (!isDragging) return;
+    translateX = startTranslateX + touch.clientX - dragStartX;
+    translateY = startTranslateY + touch.clientY - dragStartY;
+    updateModalTransform();
+  }
+
+  function endDrag() {
+    isDragging = false;
+  }
+
+  let mouseDragging = false;
+  let mouseStartX = 0, mouseStartY = 0;
+  let mouseStartTranslateX = 0, mouseStartTranslateY = 0;
+
+  modalImage.addEventListener("mousedown", event => {
+    if (modalZoom <= 1) return;
+    event.preventDefault();
+    mouseDragging = true;
+    mouseStartX = event.clientX;
+    mouseStartY = event.clientY;
+    mouseStartTranslateX = translateX;
+    mouseStartTranslateY = translateY;
+  });
+
+  document.addEventListener("mousemove", event => {
+    if (!mouseDragging) return;
+    translateX = mouseStartTranslateX + event.clientX - mouseStartX;
+    translateY = mouseStartTranslateY + event.clientY - mouseStartY;
+    updateModalTransform();
+  });
+
+  document.addEventListener("mouseup", () => {
+    mouseDragging = false;
+  });
+
+  document.addEventListener("keydown", event => {
+    if (!modal.classList.contains("active")) return;
+
+    if (event.key === "Escape") closeModal();
+    if (event.key === "+" || event.key === "=") changeModalZoom(.2);
+    if (event.key === "-") changeModalZoom(-.2);
+    if (event.key === "0") resetModalZoom();
+  });
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal || event.target === modalContent) closeModal();
+  });
+</script>
 </body>
 </html>
